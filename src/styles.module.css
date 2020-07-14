@@ -1,9 +1,57 @@
 /* add css module styles here (optional) */
+@import '~antd/dist/antd.css';
 
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
+.payWithEscrowButton {
+  background: #009AFF;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  height: auto;
+  line-height: 22px;
+  padding: 10px 15px;
   text-align: center;
+}
+
+.payWithEscrowButton:hover {
+  background: #009AFF;
+  color: #fff;
+}
+
+.payModal .ant-modal-content {
+  border-radius: 13px;
+}
+
+.backButton {
+  color: #009AFF;
+  font-weight: 600;
+  font-size: 16px;
+}
+.backButton:hover {
+  cursor: pointer;
+}
+.back {
+  margin-left: 5px;
+  display: inline-block;
+}
+.payWithEscrow {
+  font-weight: 600;
+  font-size: 1.3em;
+  text-align: right;
+  width: 100%;
+}
+.itemDescriptionRow {
+  margin-top: 50px;
+}
+.itemDescription {
+  font-size: 16px;
+  line-height: 22px;
+}
+.amount {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 49px;
+}
+.amountRow {
+  margin-top: 10px;
 }

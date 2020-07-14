@@ -1,10 +1,14 @@
 import React from 'react'
 
-import { ExampleComponent } from 'kleros-escrow'
+import PayWithEscrowButton from 'kleros-escrow'
 import 'kleros-escrow/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <PayWithEscrowButton
+    amount={'10000000000000000000'}
+    currency={'DAI'}
+    itemDescription={'Camera Nikon 83x optical zoom lens, model x32a 9, additional lens'}
+  />
 }
 
 export default App
