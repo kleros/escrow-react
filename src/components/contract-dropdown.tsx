@@ -1,13 +1,19 @@
 import { Row, Col } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
 import styles from './contract-dropdown.module.css'
 import React, { useState } from 'react'
 
 interface Props {
-  contractText?: string
+  amount: string,
+  address?: string,
+  itemDescription: string,
+  seller: string,
+  dueDate: string,
+  additionalClause?: string,
+  disputeDate: string
 }
 
-export default ({contractText}: Props) => {
+const ContractDropdown = ({amount, address, itemDescription, seller, dueDate, additionalClause, disputeDate}: Props) => {
   const [ showContract, setShowContract ] = useState(false)
 
   return (
@@ -17,16 +23,36 @@ export default ({contractText}: Props) => {
           Contract
         </Col>
         <Col lg={12} className={styles.showFullContractIcon}>
-          <PlusOutlined />
+          {
+            showContract ? (
+              <MinusOutlined />
+            ) : (
+              <PlusOutlined />
+            )
+          }
         </Col>
       </Row>
       {
         showContract ? (
-          <div>
-            {contractText}
+          <div className={styles.contractText}>
+            <span>By Paying {amount}, ETH address {address} should receive {itemDescription} from {seller} before {dueDate}</span>
+            <br/><br/>
+            {
+              additionalClause ? (
+                <div>
+                  <span>{additionalClause}</span>
+                  <br/><br/>
+                </div>
+              ) : ''
+            }
+            <span>In case of a dispute, it will be arbitrated by Kleros E-Commerce court. If no dispute is raised before {disputeDate}, the funds in escrow will automatically be released.</span>
+            <br/><br/>
+            <a href="https://kleros.io">Learn more about how the Escrow works?</a>
           </div>
         ) : ''
       }
     </div>
   )
 }
+
+export default ContractDropdown

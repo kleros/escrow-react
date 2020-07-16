@@ -2071,6 +2071,13 @@
     "@types/testing-library__dom" "*"
     pretty-format "^25.1.0"
 
+"@types/web3@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@types/web3/-/web3-1.2.2.tgz#d95a101547ce625c5ebd0470baa5dbd4b9f3c015"
+  integrity sha512-eFiYJKggNrOl0nsD+9cMh2MLk4zVBfXfGnVeRFbpiZzBE20eet4KLA3fXcjSuHaBn0RnQzwLAGdgzgzdet4C0A==
+  dependencies:
+    web3 "*"
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-15.0.0.tgz#cb3f9f741869e20cce330ffbeb9271590483882d"
@@ -13184,7 +13191,7 @@ web3-utils@1.2.9:
     underscore "1.9.1"
     utf8 "3.0.0"
 
-web3@^1.2.9:
+web3@*, web3@^1.2.9:
   version "1.2.9"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.2.9.tgz#cbcf1c0fba5e213a6dfb1f2c1f4b37062e4ce337"
   integrity sha512-Mo5aBRm0JrcNpN/g4VOrDzudymfOnHRC3s2VarhYxRA8aWgF5rnhQ0ziySaugpic1gksbXPe105pUWyRqw8HUA==

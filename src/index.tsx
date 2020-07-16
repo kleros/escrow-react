@@ -11,20 +11,36 @@ interface PayWithEscrowButtonProps {
   showSecuredByKleros?: boolean,
   amount: string,
   currency?: string,
-  itemDescription?: string
+  itemDescription: string,
+  web3?: Web3,
+  sellerAddress: string
 }
 
-const contractText = `By Paying [Price/deposit], [Blockchain] address [Address] should receive [Deliverable Description] from the [Seller/Service Provider] before [Due Date].
-  \n\n
-  [Additional Clause (According to the type of escrow) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur].
-  \n
-  In case of a dispute, it will be arbitrated by Kleros E-Commerce court.
-  If no dispute is raised before [date], the funds in escrow will automatically be released.
-  Learn more about how the Escrow works?`
+declare global {
+    interface Window { ethereum: any; }
+}
 
-const PayWithEscrowButton = ({text, style, itemDescription, amount, currency}: PayWithEscrowButtonProps) => {
+const PayWithEscrowButton = ({
+    text,
+    style,
+    itemDescription,
+    amount,
+    currency,
+    web3,
+    sellerAddress
+  }: PayWithEscrowButtonProps
+) => {
   const [ showModal, setShowModal ] = useState(false)
-  const web3 = new Web3('https://mainnet.infura.io')
+  if (!web3) {
+    console.log(window.ethereum)
+    web3 = new Web3(window.ethereum)
+    if (window.ethereum) {
+
+    } else {
+      // Ask for connection TODO
+    }
+  }
+  console.log(web3.eth.accounts[0])
 
   return (
     <div>
@@ -63,7 +79,14 @@ const PayWithEscrowButton = ({text, style, itemDescription, amount, currency}: P
             </Col>
           </Row>
           <Row>
-            <ContractDropdown contractText={contractText}/>
+            <ContractDropdown
+              address={web3.eth.accounts[0]}
+              amount={`${web3.utils.fromWei(amount)} ${currency || 'ETH'}`}
+              itemDescription={itemDescription}
+              seller={sellerAddress}
+              dueDate={(new Date()).toString()}
+              disputeDate={(new Date()).toString()}
+            />
           </Row>
         </div>
       </Modal>
