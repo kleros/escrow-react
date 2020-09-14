@@ -1,10 +1,9 @@
-import { Button, Modal, Row, Col } from 'antd'
+import { Button, Modal } from 'antd'
 import { addresses } from './constants/addresses'
 import MULTIPLE_ARBITRABLE from './constants/multiple-arbitrable-transaction'
 import React, { useState, useEffect } from 'react'
 import styles from './styles.module.css'
-import ContractDropdown from './components/contract-dropdown'
-import SecuredByKleros from './assets/secured-by-kleros.png'
+import PayView from './components/pay-view'
 import Web3 from 'web3'
 
 interface PayWithEscrowButtonProps {
@@ -37,6 +36,7 @@ const PayWithEscrowButton = ({
 ) => {
   const [ showModal, setShowModal ] = useState(false)
   const [ accounts, setAccounts ] = useState<Array<string>>([])
+  const [ txHash, setTxHash ] = useState<string>('')
 
   if (!web3) {
     web3 = new Web3(window.ethereum)
@@ -61,7 +61,7 @@ const PayWithEscrowButton = ({
           MULTIPLE_ARBITRABLE,
           _contractAddress
         )
-        contractInstance.methods.createTransaction(
+        const txHash = await contractInstance.methods.createTransaction(
           '100000000',
           sellerAddress,
           `/ipfs/test/metaEvidence.json`
@@ -71,8 +71,16 @@ const PayWithEscrowButton = ({
             value: amount
           }
         )
+
+        if (txHash)
+          setTxHash(txHash)
       }
     }
+  }
+
+  const closeModal = async () => {
+    setShowModal(false)
+    setTxHash('')
   }
 
   return (
@@ -89,54 +97,26 @@ const PayWithEscrowButton = ({
         closable={false}
         className={styles.payModal}
         footer={null}
-        width={'60%'}
+        width={'50%'}
+        onCancel={closeModal}
       >
         <div className={styles.modalContainer}>
-          <Row>
-            <Col lg={24} md={24} sm={24} xs={24} className={styles.payWithEscrow}>
-              Pay with Escrow
-            </Col>
-          </Row>
-          <Row className={styles.itemDescriptionRow} >
-            <Col className={styles.itemDescription}>
-              {itemDescription}
-            </Col>
-          </Row>
-          <Row className={styles.amountRow} >
-            <Col className={styles.amount}>
-              {`${web3.utils.fromWei(amount)} ${currency ? currency.toUpperCase() : 'ETH'}`}
-            </Col>
-          </Row>
-          <Row>
-            <ContractDropdown
-              address={accounts[0]}
-              amount={`${web3.utils.fromWei(amount)} ${currency ? currency.toUpperCase() : 'ETH'}`}
-              itemDescription={itemDescription}
-              seller={sellerAddress}
-              dueDate={(new Date()).toString()}
-              disputeDeadline={(new Date()).toString()}
-            />
-          </Row>
-          <Row className={styles.actionButtons}>
-            <Col lg={5} md={7} sm={10} xs={11}>
-              <div className={styles.cancelButton} onClick={() => setShowModal(false)}>Return</div>
-            </Col>
-            <Col lg={14} md={10} sm={4} xs={2}>
-            </Col>
-            <Col lg={5} md={7} sm={10} xs={11}>
-              <div className={styles.payButton} onClick={() => submitPurchase()}>Pay</div>
-            </Col>
-          </Row>
           {
-            !hideSecuredByKleros ? (
-              <Row className={styles.securedByKleros}>
-                <Col lg={19} md={17} sm={14}>
-                </Col>
-                <Col lg={5} md={7} sm={10}>
-                  <img className={styles.securedByKlerosImg} src={SecuredByKleros} />
-                </Col>
-              </Row>
-            ) : ''
+            txHash ? (
+              <div />
+            ) : (
+              <PayView
+                hideSecuredByKleros={hideSecuredByKleros}
+                address={accounts[0]}
+                itemDescription={itemDescription}
+                sellerAddress={sellerAddress}
+                amount={amount}
+                currency={currency}
+                web3={web3}
+                submitPurchase={submitPurchase}
+                setShowModal={setShowModal}
+              />
+            )
           }
         </div>
       </Modal>
