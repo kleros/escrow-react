@@ -36,22 +36,62 @@
 }
 .payWithEscrow {
   font-weight: 600;
-  font-size: 1.3em;
-  text-align: right;
+  font-size: 24px;
+  text-align: center;
   width: 100%;
 }
 .itemDescriptionRow {
-  margin-top: 50px;
+  margin-top: 35px;
+  text-align: center;
 }
 .itemDescription {
   font-size: 16px;
   line-height: 22px;
+  width: 100%;
 }
 .amount {
   font-weight: 600;
-  font-size: 36px;
-  line-height: 49px;
+  font-size: 24px;
+  line-height: 33px;
+  width: 100%;
 }
 .amountRow {
   margin-top: 10px;
+  text-align: center;
+}
+.actionButtons {
+  margin-top: 32px;
+}
+.cancelButton {
+  border: 1px solid #009AFF;
+  border-radius: 3px;
+  color: #009AFF;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 11px 30px;
+  text-align: center;
+  width: 100%;
+}
+.payButton {
+  background: #009AFF;
+  border: 1px solid #009AFF;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 11px 30px;
+  text-align: center;
+  width: 100%;
+}
+.securedByKleros {
+  margin: 20px 0px;
+}
+.securedByKlerosImg {
+  width: 100%;
 }
