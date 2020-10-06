@@ -1,0 +1,69 @@
+.mailIcon {
+  color: #009AFF;
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.header {
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+}
+.subHeadRow {
+  margin: 15px 25px;
+  text-align: center;
+}
+.subHead {
+  font-size: 16px;
+  line-height: 22px;
+  width: 100%;
+}
+.actionButtons {
+  margin-top: 32px;
+}
+.cancelButton {
+  border: 1px solid #009AFF;
+  border-radius: 3px;
+  color: #009AFF;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 11px 30px;
+  text-align: center;
+  width: 100%;
+}
+.payButton {
+  background: #009AFF;
+  border: 1px solid #009AFF;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 11px 30px;
+  text-align: center;
+  width: 100%;
+}
+.securedByKleros {
+  margin: 20px 0px;
+}
+.securedByKlerosImg {
+  width: 100%;
+}
+.emailInput {
+  border: 1px solid #CCCCCC;
+  box-sizing: border-box;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 22px;
+  margin-top: 25px;
+  padding: 10px 16px;
+  width: 100%;
+}

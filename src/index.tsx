@@ -4,10 +4,11 @@ import MULTIPLE_ARBITRABLE from './constants/multiple-arbitrable-transaction'
 import React, { useState, useEffect } from 'react'
 import styles from './styles.module.css'
 import PayView from './components/pay-view'
+import NotificationView from './components/notification-view'
 import Web3 from 'web3'
 
 interface PayWithEscrowButtonProps {
-  text?: string,
+  buttonText?: string,
   style?: object,
   hideSecuredByKleros?: boolean,
   amount: string,
@@ -16,6 +17,9 @@ interface PayWithEscrowButtonProps {
   web3?: Web3,
   sellerAddress: string,
   subcourt?: string,
+  disableNotifications?: boolean,
+  transactionCallback: (txHash: string) => any,
+  sellerEmail?: string,
 }
 
 declare global {
@@ -23,7 +27,7 @@ declare global {
 }
 
 const PayWithEscrowButton = ({
-    text,
+    buttonText,
     style,
     itemDescription,
     amount,
@@ -31,7 +35,9 @@ const PayWithEscrowButton = ({
     web3,
     sellerAddress,
     subcourt,
-    hideSecuredByKleros
+    hideSecuredByKleros,
+    transactionCallback,
+    sellerEmail
   }: PayWithEscrowButtonProps
 ) => {
   const [ showModal, setShowModal ] = useState(false)
@@ -72,8 +78,11 @@ const PayWithEscrowButton = ({
           }
         )
 
-        if (txHash)
+        if (txHash) {
           setTxHash(txHash)
+          transactionCallback(txHash)
+          // register emails
+        }
       }
     }
   }
@@ -90,7 +99,7 @@ const PayWithEscrowButton = ({
         className={styles.payWithEscrowButton}
         onClick={() => {setShowModal(!showModal)}}
       >
-        {text || 'Pay With Escrow'}
+        {buttonText || 'Pay With Escrow'}
       </Button>
       <Modal
         visible={showModal}
@@ -103,7 +112,10 @@ const PayWithEscrowButton = ({
         <div className={styles.modalContainer}>
           {
             txHash ? (
-              <div />
+              <NotificationView
+                sellerEmail={sellerEmail}
+                txHash={txHash}
+              />
             ) : (
               <PayView
                 hideSecuredByKleros={hideSecuredByKleros}
