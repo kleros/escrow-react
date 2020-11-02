@@ -15,7 +15,7 @@ npm install --save kleros-escrow
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'kleros-escrow'
+import PayWithEscrowButton from 'kleros-escrow'
 import 'kleros-escrow/dist/index.css'
 
 class Example extends Component {
@@ -24,6 +24,12 @@ class Example extends Component {
   }
 }
 ```
+
+## Development
+
+In the root directory run `yarn start` to spin up a development server that builds new changes to `/dist`.
+
+In `/example` run `yarn start` to run the test webapp that uses the built components.
 
 ## License
 

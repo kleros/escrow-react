@@ -44,6 +44,7 @@ const PayWithEscrowButton = ({
   const [ accounts, setAccounts ] = useState<Array<string>>([])
   const [ txHash, setTxHash ] = useState<string>('')
 
+  // Set web3 if not passed
   if (!web3) {
     web3 = new Web3(window.ethereum)
   }
@@ -67,6 +68,7 @@ const PayWithEscrowButton = ({
           MULTIPLE_ARBITRABLE,
           _contractAddress
         )
+        // TODO generate meta evidence and add to IPFS
         const txHash = await contractInstance.methods.createTransaction(
           '100000000',
           sellerAddress,
@@ -81,7 +83,7 @@ const PayWithEscrowButton = ({
         if (txHash) {
           setTxHash(txHash)
           transactionCallback(txHash)
-          // register emails
+          // TODO register emails with AWS
         }
       }
     }

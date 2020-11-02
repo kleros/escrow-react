@@ -17,7 +17,7 @@ const NotificationView = (
   const registerTransactionNotifications = () => {
     if (email) {
       // TODO
-      fetch('post', {
+      fetch('TODO', {
         method: 'post',
         body: JSON.stringify({
           txHash,

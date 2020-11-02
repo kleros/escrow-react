@@ -1,6 +1,6 @@
 export const addresses = {
   "eth": {
-    "general": "0x0d67440946949fe293b45c52efd8a9b3d51e2522",
+    "general": "0xadD111C599E9ec348718b6C33BaA8a99E26a5878",
   },
   "erc20": {
     "general": "0xBCf0d1AD453728F75e9cFD4358ED187598A45e6c"
